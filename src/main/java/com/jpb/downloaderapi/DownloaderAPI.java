@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 
 public class DownloaderAPI {
-    public void download(Context context, String uri, String filetitle, String filename) {
+    public static void download(Context context, String uri, String filetitle, String filename) {
         DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         Uri urifunction = Uri.parse(uri);
 
