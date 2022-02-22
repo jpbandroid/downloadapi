@@ -10,7 +10,7 @@ import android.widget.Toast;
 import java.lang.Exception;
 
 public class DownloaderAPI {
-    public static void download(Context context, String uri, String filetitle, String filename, Boolean downloadingTextIsNew, Integer SaveDirectory) {
+    public static void download(Context context, String uri, String filetitle, String filename, Boolean downloadingTextIsNew, Integer SaveDirectory, Boolean showDownloadProgress) {
         DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         Uri urifunction = Uri.parse(uri);
 
@@ -19,7 +19,11 @@ public class DownloaderAPI {
         if (!downloadingTextIsNew) {
             request.setDescription("Downloading");
         } else {
-            request.setDescription("Downloading... " + DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR + " / " + DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+            if (!showDownloadProgress) {
+                request.setDescription("Downloading...");
+            } else {
+                request.setDescription("Downloading... " + DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR + " / " + DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+            }
         }
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         if (SaveDirectory == 1) {
@@ -35,6 +39,8 @@ public class DownloaderAPI {
             }
         } else if (SaveDirectory == 3) {
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DCIM, filename);
+        } else if (SaveDirectory == 4) {
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_NOTIFICATIONS, filename);
         } else {
             SaveDirectory = 0;
         }
