@@ -41,6 +41,8 @@ public class DownloaderAPI {
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DCIM, filename);
         } else if (SaveDirectory == 4) {
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_NOTIFICATIONS, filename);
+        } else if  (SaveDirectory == 5)  {
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, filename);
         } else {
             SaveDirectory = 0;
         }

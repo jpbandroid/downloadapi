@@ -27,7 +27,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        classpath 'org.jlleitschuh.gradle:ktlint-gradle:8.0.0'
     }
 }
 
@@ -49,6 +48,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        project.version = "1.2.0"
     }
 
     buildTypes {
@@ -60,6 +61,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+android.libraryVariants.all { variant ->
+    variant.outputs.all {
+        outputFileName = "DownloadAPI-${project.version}.aar"
     }
 }
 
